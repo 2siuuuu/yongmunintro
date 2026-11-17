@@ -3,7 +3,12 @@ import { loadEnv } from 'vite';
 import { render } from '../.ssr/entry-server.js';
 import { siteSettings, escapeXml } from './seo.mjs';
 
-const { indexable, url } = siteSettings({ ...loadEnv('production', process.cwd(), ''), ...process.env });
+const environment = { ...loadEnv('production', process.cwd(), ''), ...process.env };
+// Cloudflare preview branches must not compete with the production URL.
+if (environment.CF_PAGES_BRANCH && environment.CF_PAGES_BRANCH !== 'main') {
+  environment.SITE_INDEXABLE = 'false';
+}
+const { indexable, url } = siteSettings(environment);
 let template = await readFile('dist/index.html', 'utf8');
 if (!template.includes('<!--app-html-->')) throw new Error('정적 렌더링 삽입 지점이 없습니다.');
 template = template.replace('<!--app-html-->', render());

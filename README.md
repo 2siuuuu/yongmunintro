@@ -34,14 +34,14 @@ npm run preview
 
 화면은 React로 작성하지만 배포 HTML에 제목·본문·내부 링크가 이미 포함됩니다. 클라이언트는 기존 HTML을 hydrate하여 메뉴 이벤트를 연결합니다. 메인 페이지 하나이므로 sitemap에는 메인 URL 하나만 포함됩니다. 향후 검증된 관광지·이야기를 상세 페이지로 추가할 때 각 URL도 사전 생성해야 합니다.
 
-현재는 지역 및 콘텐츠 미확정으로 `noindex`가 기본값입니다. 실제 공개 도메인과 콘텐츠가 확정되면 `.env` 또는 Cloudflare 빌드 환경변수에 아래를 설정하고 다시 빌드합니다.
+공개 주소는 `https://yongmunintro-2.pages.dev/`입니다. `.env.production`에 도메인과 색인 활성화를 설정했습니다. 빌드하면 메인 페이지 한 개를 포함하는 `/sitemap.xml`과 해당 사이트맵을 안내하는 `/robots.txt`가 생성됩니다. `#scenery` 등 섹션 링크는 별도 페이지가 아니므로 포함하지 않습니다. 도메인 변경 시 `.env.production` 또는 Cloudflare 빌드 환경변수를 수정하고 다시 빌드합니다.
 
 ```dotenv
-SITE_URL=https://실제-공개-도메인
+SITE_URL=https://yongmunintro-2.pages.dev/
 SITE_INDEXABLE=true
 ```
 
-활성화하면 canonical, og:url, robots.txt, sitemap.xml에 실제 주소가 반영됩니다. Preview 배포는 `SITE_INDEXABLE=false`로 유지하세요. 본문 사실 확인, 메타데이터와 실제 콘텐츠 검토, Google Search Console 및 네이버 서치어드바이저 등록은 공개 시 진행합니다. 폰트는 사용자가 지정한 jsDelivr URL에서 로드하며 연결 실패 시 시스템 sans-serif를 사용합니다.
+활성화하면 canonical, og:url, robots.txt, sitemap.xml에 실제 주소가 반영됩니다. Cloudflare의 `main` 이외 브랜치 배포는 자동으로 색인을 차단합니다. Cloudflare에 기존 `SITE_INDEXABLE=false` 환경변수가 있으면 파일 설정보다 우선하므로 Production 설정을 `true`로 변경해야 합니다. Google Search Console 및 네이버 서치어드바이저에 제출할 주소는 `https://yongmunintro-2.pages.dev/sitemap.xml`입니다. 폰트는 사용자가 지정한 jsDelivr URL에서 로드하며 연결 실패 시 시스템 sans-serif를 사용합니다.
 
 ## GitHub + Cloudflare Pages 배포
 
