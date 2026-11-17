@@ -18,7 +18,22 @@ npm run check
 npm run preview
 ```
 
-빌드 화면: http://127.0.0.1:4173. Vite 개발·미리보기 서버는 화면만 제공합니다. Hono API까지 함께 확인하려면 빌드 후 `npm run preview:pages`를 실행하고 출력된 주소에서 `/api/health`를 확인하세요. `npm run pages:check`는 Functions 번들링 검증입니다.
+빌드 화면: http://127.0.0.1:4173. Vite 개발·미리보기 서버에 Hono API를 연결했습니다. 개발 중 `server/` 코드를 수정하면 개발 서버를 재시작하세요. Cloudflare 런타임에서 확인하려면 빌드 후 `npm run preview:pages`를 실행하고 출력된 주소에서 `/api/health`를 확인하세요. `npm run pages:check`는 Functions 번들링 검증입니다.
+
+## Google 로그인 연습
+
+헤더의 로그인 버튼을 누르면 Google 공식 로그인 버튼이 있는 창이 열립니다. Google 팝업에서 계정을 선택한 뒤 `/api/auth/google`이 Google 공개키로 ID 토큰의 서명, 발급자, 대상 클라이언트 ID, 만료, 발급 시간과 nonce를 검증합니다. 로그인 실패 시 재시도할 수 있습니다.
+
+- 클라이언트 ID: `shared/google-auth.js` (공개 식별자이며 시크릿이 아닙니다.)
+- Google Cloud의 해당 웹 OAuth 클라이언트에서 승인된 JavaScript 원본에 `https://yongmunintro-2.pages.dev`를 등록해야 합니다. 경로와 마지막 `/`는 넣지 않습니다.
+- 로컬 확인은 `http://localhost`, `http://localhost:5173`를 원본에 등록하고 `http://localhost:5173`으로 접속하세요. Preview 사용 시 `http://localhost:4173`도 등록합니다. 실제 접속 주소와 등록한 원본이 일치해야 합니다.
+- 팝업 + JavaScript 콜백 방식으로 구현하여 클라이언트 시크릿이나 리디렉션 URI는 사용하지 않습니다.
+- 성공 여부와 만료 시각만 React 메모리에 유지합니다. DB·localStorage·sessionStorage·자체 세션 쿠키는 사용하지 않으며 이름·이메일·프로필은 응답하지 않습니다. 요청 본문과 토큰을 애플리케이션 로그에 기록하지 않습니다.
+- 새로고침·로그아웃·토큰 만료 시 로그인 표시가 초기화됩니다. 로그아웃은 이 사이트의 표시를 초기화하며 Google 계정 자체를 로그아웃시키지 않습니다. Google SDK는 자체 로그인 동작을 위해 Google 측 쿠키 등을 사용할 수 있습니다.
+- 회원 전용 기능이나 영속적인 서버 세션은 없는 인증 연습입니다. 추후 보호 API를 추가한다면 매 요청마다 서버 인증을 별도로 구현해야 합니다.
+- 실제 Google 계정 로그인은 설정된 원본과 계정 정책을 포함해 배포 후 직접 확인해야 합니다. 자동 테스트는 로컬 테스트 키와 Google SDK 모의 객체를 사용합니다.
+
+공식 참고: [Google 설정](https://developers.google.com/identity/gsi/web/guides/get-google-api-clientid), [토큰 검증](https://developers.google.com/identity/gsi/web/guides/verify-google-id-token), [Google JavaScript API](https://developers.google.com/identity/gsi/web/reference/js-reference).
 
 ## 구조
 
