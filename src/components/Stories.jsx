@@ -1,0 +1,3 @@
+export default function Stories(){
+return (<section id="stories" className="section story"><div><span className="eyebrow">03 / VILLAGE JOURNAL</span><h2>작은 마을,<br />차곡차곡 쌓이는 이야기.</h2><p style={{"color":"var(--muted)","fontSize":"13px"}}>앞으로 담아갈 이야기를 미리 만나보세요.</p></div><div className="story-list"><article><small>기획 01</small><div><h3>이름에서 시작하는 마을 이야기</h3><p>용문동의 이름과 기억을 찾아가는 기록</p></div><span className="text-xs text-stone-500">예정</span></article><article><small>기획 02</small><div><h3>마을을 걷는 사람의 시선</h3><p>일상의 길에서 발견하는 소소한 장면</p></div><span className="text-xs text-stone-500">예정</span></article><article><small>기획 03</small><div><h3>함께 남기는 계절의 기록</h3><p>사진과 글로 모아갈 우리 마을의 사계절</p></div><span className="text-xs text-stone-500">예정</span></article></div></section>);
+}

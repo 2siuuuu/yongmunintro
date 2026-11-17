@@ -1,0 +1,4 @@
+export default function Hero(){
+return (<section className="hero" aria-labelledby="hero-title"><div className="hero-top"><div><span className="eyebrow">A LITTLE PAUSE, YONGMUN-DONG</span><h1 id="hero-title">잠시, 걸음을 늦추면<br /><strong>용문동이 보입니다.</strong></h1></div><div className="hero-copy"><p>익숙한 일상에서 조금 벗어나,<br />작은 마을의 이야기를 만나보세요.<br />천천히 알아갈수록 가까워지는 곳, 용문동.</p><a className="text-link" href="#about">우리 마을 둘러보기 <span>↗</span></a></div></div>
+<div className="landscape"><img src="/images/landscape.svg" alt="산과 들, 작은 집들이 어우러진 창작 마을 풍경 일러스트" fetchPriority="high" /><div className="scene-label">마을을 그리다<span>YONGMUN-DONG · CONCEPT ILLUSTRATION</span></div><a className="round" href="#scenery" aria-label="마을의 풍경 보기">↓</a></div><div className="hero-bottom"><span>조금 느리게, 조금 더 가까이.</span><span>01 — 마을과 만나는 시간</span></div></section>);
+}

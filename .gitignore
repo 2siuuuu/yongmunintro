@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.ssr/
+.pages-check/
+.wrangler/
+.npm-cache/
+.env
+.env.local
+.dev.vars
